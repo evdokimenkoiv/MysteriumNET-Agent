@@ -1,0 +1,12 @@
+services:
+  agent:
+    build: .
+    image: mysteriumnet-agent-agent:latest
+    container_name: mysteriumnet-agent
+    restart: unless-stopped
+    environment:
+      - MANAGER_URL=${MANAGER_URL}
+      - MANAGER_SECRET=${MANAGER_SECRET}
+      - WALLET_ADDRESS=${WALLET_ADDRESS}
+      - AGENT_NAME=${AGENT_NAME:-$(hostname)}
+    command: ["python","-m","agent.main"]
